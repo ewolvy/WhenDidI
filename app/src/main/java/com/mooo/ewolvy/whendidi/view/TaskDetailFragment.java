@@ -1,4 +1,4 @@
-package com.mooo.ewolvy.whendidi;
+package com.mooo.ewolvy.whendidi.view;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mooo.ewolvy.whendidi.R;
 import com.mooo.ewolvy.whendidi.dummy.DummyContent;
 
 /**

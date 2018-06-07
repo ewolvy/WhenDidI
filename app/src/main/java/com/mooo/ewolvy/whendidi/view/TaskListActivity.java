@@ -1,4 +1,4 @@
-package com.mooo.ewolvy.whendidi;
+package com.mooo.ewolvy.whendidi.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mooo.ewolvy.whendidi.R;
 import com.mooo.ewolvy.whendidi.dummy.DummyContent;
 
 import java.util.List;
@@ -133,8 +134,8 @@ public class TaskListActivity extends AppCompatActivity {
 
             ViewHolder(View view) {
                 super(view);
-                mIdView = view.findViewById(R.id.id_text);
-                mContentView = view.findViewById(R.id.content);
+                mIdView = view.findViewById(R.id.lbl_task_name);
+                mContentView = view.findViewById(R.id.lbl_task_reminder);
             }
         }
     }
