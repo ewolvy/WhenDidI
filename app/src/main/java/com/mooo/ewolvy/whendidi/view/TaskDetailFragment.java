@@ -53,7 +53,7 @@ public class TaskDetailFragment extends Fragment {
             assert activity != null;
             CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+                appBarLayout.setTitle(mItem.name);
             }
         }
     }
@@ -65,7 +65,7 @@ public class TaskDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.task_detail)).setText(mItem.details);
+            ((TextView) rootView.findViewById(R.id.task_detail)).setText(mItem.name);
         }
 
         return rootView;

@@ -116,8 +116,10 @@ public class TaskListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
+            holder.mNameView.setText(mValues.get(position).name);
+            holder.mDateReminder.setText(mValues.get(position).remindOn);
+            holder.mLastTime.setText(mValues.get(position).lastTime);
+            holder.mView.setBackgroundColor(mValues.get(position).color);
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
@@ -129,13 +131,17 @@ public class TaskListActivity extends AppCompatActivity {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            final TextView mIdView;
-            final TextView mContentView;
+            final TextView mNameView;
+            final TextView mDateReminder;
+            final TextView mLastTime;
+            final View mView;
 
             ViewHolder(View view) {
                 super(view);
-                mIdView = view.findViewById(R.id.lbl_task_name);
-                mContentView = view.findViewById(R.id.lbl_task_reminder);
+                mNameView = view.findViewById(R.id.lbl_task_name);
+                mDateReminder = view.findViewById(R.id.lbl_date_reminder);
+                mLastTime = view.findViewById(R.id.lbl_last_date);
+                mView = view.findViewById(R.id.item_root);
             }
         }
     }
