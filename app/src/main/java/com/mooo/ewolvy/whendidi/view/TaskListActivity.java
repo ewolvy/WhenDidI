@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,8 @@ public class TaskListActivity extends AppCompatActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     public static class SimpleItemRecyclerViewAdapter
@@ -144,5 +147,30 @@ public class TaskListActivity extends AppCompatActivity {
                 mView = view.findViewById(R.id.item_root);
             }
         }
+    }
+
+    private ItemTouchHelper.Callback createHelperCallback() {
+        /*First Param is for Up/Down motion, second is for Left/Right.
+        Note that we can supply 0, one constant (e.g. ItemTouchHelper.LEFT), or two constants (e.g.
+        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) to specify what directions are allowed.
+        */
+
+        return new ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.UP | ItemTouchHelper.DOWN,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            // Dragged up or down
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                                  RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            // Swiped left or right
+            @Override
+            public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
+
+            }
+        };
     }
 }

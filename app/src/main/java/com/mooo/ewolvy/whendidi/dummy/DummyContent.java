@@ -89,6 +89,11 @@ public class DummyContent {
         ITEM_MAP.put(item.id, item);
     }
 
+    private static void deleteItem(int position){
+        ITEMS.remove(position);
+        ITEM_MAP.remove(String.valueOf(position));
+    }
+
     private static DummyItem createDummyItem(String id, String name, String datesHistory, int color, String lastTime, String remindOn) {
         return new DummyItem(id, name, datesHistory, color, lastTime, remindOn);
     }
