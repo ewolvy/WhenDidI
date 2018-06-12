@@ -1,6 +1,7 @@
 package com.mooo.ewolvy.whendidi.view;
 
 import android.app.Activity;
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
@@ -11,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mooo.ewolvy.whendidi.R;
-import com.mooo.ewolvy.whendidi.dummy.DummyContent;
 import com.mooo.ewolvy.whendidi.model.TaskItem;
+import com.mooo.ewolvy.whendidi.viewmodel.TasksViewModel;
 
 /**
  * A fragment representing a single Task detail screen.
@@ -31,6 +32,7 @@ public class TaskDetailFragment extends Fragment {
      * The dummy content this fragment is presenting.
      */
     private TaskItem mItem;
+    TasksViewModel tasksViewModel;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -49,6 +51,8 @@ public class TaskDetailFragment extends Fragment {
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
             //mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+
+            tasksViewModel = ViewModelProviders.of(this).get(TasksViewModel.class);
 
             Activity activity = this.getActivity();
             assert activity != null;

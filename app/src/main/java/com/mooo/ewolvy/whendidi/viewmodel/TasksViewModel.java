@@ -11,14 +11,18 @@ import java.util.List;
 public class TasksViewModel extends ViewModel {
     private List<TaskItem> tasksList;
 
-    public List<TaskItem> getTasksList(){
+    private void loadDummyUsers(){
+        tasksList = DummyContent.ITEMS;
+    }
+
+    public List<TaskItem> getAllTasks(){
         if (tasksList == null){
             loadDummyUsers();
         }
         return tasksList;
     }
 
-    public List<TaskItem> getRemindTasksList(){
+    public List<TaskItem> getRemindTasks(){
         if (tasksList == null){
             loadDummyUsers();
         }
@@ -33,7 +37,14 @@ public class TasksViewModel extends ViewModel {
         return remindedTasksList;
     }
 
-    private void loadDummyUsers(){
-        tasksList = DummyContent.ITEMS;
+    public TaskItem getItem(int position){
+        if (tasksList == null){
+            loadDummyUsers();
+        }
+        return tasksList.get(position);
+    }
+
+    public void deleteTask (int position){
+        tasksList.remove(position);
     }
 }

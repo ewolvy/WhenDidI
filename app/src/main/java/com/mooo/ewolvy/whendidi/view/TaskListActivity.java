@@ -37,6 +37,9 @@ public class TaskListActivity extends AppCompatActivity {
      * device.
      */
     private boolean mTwoPane;
+    private TasksViewModel tasksViewModel;
+    private List<TaskItem> mValues;
+    SimpleItemRecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,19 +74,18 @@ public class TaskListActivity extends AppCompatActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
 
-        TasksViewModel tasksViewModel =
-                ViewModelProviders.of(this).get(TasksViewModel.class);
+        tasksViewModel = ViewModelProviders.of(this).get(TasksViewModel.class);
 
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, tasksViewModel.getRemindTasksList(), mTwoPane));
+        adapter = new SimpleItemRecyclerViewAdapter(this, tasksViewModel.getRemindTasks(), mTwoPane);
+        recyclerView.setAdapter(adapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
-    public static class SimpleItemRecyclerViewAdapter
+    private class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         private final TaskListActivity mParentActivity;
-        private final List<TaskItem> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
@@ -175,7 +177,12 @@ public class TaskListActivity extends AppCompatActivity {
             // Swiped left or right
             @Override
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
-
+                /*if (tasksViewModel.deleteTask(String.valueOf(viewHolder.getAdapterPosition()))){
+                    adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                }*/
+                tasksViewModel.deleteTask(viewHolder.getAdapterPosition());
+                mValues.remove(viewHolder.getAdapterPosition());
+                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
             }
         };
     }
