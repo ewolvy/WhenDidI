@@ -47,7 +47,7 @@ public class TaskItem {
         this.color = color;
     }
 
-    public String getLastTime() {
+    public String getLastDate() {
         return lastTime;
     }
 

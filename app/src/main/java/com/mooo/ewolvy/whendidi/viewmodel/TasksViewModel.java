@@ -44,6 +44,19 @@ public class TasksViewModel extends ViewModel {
         return tasksList.get(position);
     }
 
+    public TaskItem getItemById (String id){
+        if (tasksList == null){
+            loadDummyUsers();
+        }
+
+        for (int i = 0; i < tasksList.size(); i++){
+            if (tasksList.get(i).getId().equals(id)){
+                return tasksList.get(i);
+            }
+        }
+        return null;
+    }
+
     public void deleteTask (int position){
         tasksList.remove(position);
     }

@@ -9,7 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.mooo.ewolvy.whendidi.R;
 import com.mooo.ewolvy.whendidi.model.TaskItem;
@@ -32,7 +33,7 @@ public class TaskDetailFragment extends Fragment {
      * The dummy content this fragment is presenting.
      */
     private TaskItem mItem;
-    TasksViewModel tasksViewModel;
+    private TasksViewModel tasksViewModel;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -53,6 +54,7 @@ public class TaskDetailFragment extends Fragment {
             //mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
             tasksViewModel = ViewModelProviders.of(this).get(TasksViewModel.class);
+            mItem = tasksViewModel.getItemById(getArguments().getString(ARG_ITEM_ID));
 
             Activity activity = this.getActivity();
             assert activity != null;
@@ -67,12 +69,16 @@ public class TaskDetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.task_detail, container, false);
-
-        // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.task_detail)).setText(mItem.getName());
-        }
-
+        EditText editText = rootView.findViewById(R.id.txtEditName);
+        editText.setText(mItem.getName());
+        editText = rootView.findViewById(R.id.txtEditLastDate);
+        editText.setText(mItem.getLastDate());
+        Button button = rootView.findViewById(R.id.btnEditColor);
+        button.setBackgroundColor(mItem.getColor());
+        editText = rootView.findViewById(R.id.txtEditReminder);
+        editText.setText(mItem.getRemindOn());
+        editText = rootView.findViewById(R.id.txtEditHistoric);
+        editText.setText(mItem.getDatesHistory());
         return rootView;
     }
 }

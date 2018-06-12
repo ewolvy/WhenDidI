@@ -129,7 +129,7 @@ public class TaskListActivity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
             holder.mNameView.setText(mValues.get(position).getName());
             holder.mDateReminder.setText(mValues.get(position).getRemindOn());
-            holder.mLastTime.setText(mValues.get(position).getLastTime());
+            holder.mLastTime.setText(mValues.get(position).getLastDate());
             holder.mView.setBackgroundColor(mValues.get(position).getColor());
 
             holder.itemView.setTag(mValues.get(position));

@@ -99,30 +99,4 @@ public class DummyContent {
     private static TaskItem createDummyItem(String id, String name, String datesHistory, int color, String lastTime, String remindOn) {
         return new TaskItem(id, name, color, datesHistory, lastTime, remindOn);
     }
-
-    /**
-     * A dummy item representing a piece of content.
-     */
-    /*public static class DummyItem {
-        public final String id;
-        public final String name;
-        public final String datesHistory;
-        public final int color;
-        public final String lastTime;
-        public final String remindOn;
-
-        DummyItem(String id, String name, String datesHistory, int color, String lastTime, String remindOn) {
-            this.id = id;
-            this.name = name;
-            this.datesHistory = datesHistory;
-            this.color = color;
-            this.lastTime = lastTime;
-            this.remindOn = remindOn;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
-    }*/
 }
