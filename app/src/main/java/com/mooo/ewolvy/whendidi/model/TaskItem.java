@@ -2,24 +2,24 @@ package com.mooo.ewolvy.whendidi.model;
 
 
 public class TaskItem {
-    private final int id;
+    private String id;
     private String name;
     private String datesHistory;
     private int color;
     private String lastTime;
     private String remindOn;
 
-    public TaskItem(int id, String name, int color, String lastTime, String remindOn) {
+    public TaskItem(String id, String name, int color, String datesHistory, String lastTime, String remindOn) {
         this.id = id;
         this.name = name;
         this.color = color;
         this.lastTime = lastTime;
-        this.datesHistory = lastTime;
+        this.datesHistory = datesHistory;
         this.remindOn = remindOn;
     }
 
     // Public getters and setters
-    public int getId() {
+    public String getId() {
         return id;
     }
 

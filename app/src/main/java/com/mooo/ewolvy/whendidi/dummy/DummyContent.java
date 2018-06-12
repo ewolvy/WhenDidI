@@ -1,5 +1,7 @@
 package com.mooo.ewolvy.whendidi.dummy;
 
+import com.mooo.ewolvy.whendidi.model.TaskItem;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,12 +19,12 @@ public class DummyContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<DummyItem> ITEMS = new ArrayList<>();
+    public static final List<TaskItem> ITEMS = new ArrayList<>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<>();
+    public static final Map<String, TaskItem> ITEM_MAP = new HashMap<>();
 
     private static final int COUNT = 15;
 
@@ -67,7 +69,7 @@ public class DummyContent {
         // Add some sample items.
         Random random = new Random();
 
-        for (int i = 0; i <= COUNT; i++){
+        for (int i = 0; i < COUNT; i++){
             int randOne = random.nextInt(4);
             int randTwo = random.nextInt(4);
             int randThree = random.nextInt(4);
@@ -84,9 +86,9 @@ public class DummyContent {
         }
     }
 
-    private static void addItem(DummyItem item) {
+    private static void addItem(TaskItem item) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+        ITEM_MAP.put(item.getId(), item);
     }
 
     private static void deleteItem(int position){
@@ -94,18 +96,14 @@ public class DummyContent {
         ITEM_MAP.remove(String.valueOf(position));
     }
 
-    private static DummyItem createDummyItem(String id, String name, String datesHistory, int color, String lastTime, String remindOn) {
-        return new DummyItem(id, name, datesHistory, color, lastTime, remindOn);
+    private static TaskItem createDummyItem(String id, String name, String datesHistory, int color, String lastTime, String remindOn) {
+        return new TaskItem(id, name, color, datesHistory, lastTime, remindOn);
     }
 
     /**
      * A dummy item representing a piece of content.
      */
-    public static class DummyItem {
-        /*public final String id;
-        public final String content;
-        public final String details;*/
-
+    /*public static class DummyItem {
         public final String id;
         public final String name;
         public final String datesHistory;
@@ -126,5 +124,5 @@ public class DummyContent {
         public String toString() {
             return name;
         }
-    }
+    }*/
 }

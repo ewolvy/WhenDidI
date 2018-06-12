@@ -1,5 +1,6 @@
 package com.mooo.ewolvy.whendidi.view;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +17,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mooo.ewolvy.whendidi.R;
-import com.mooo.ewolvy.whendidi.dummy.DummyContent;
+import com.mooo.ewolvy.whendidi.model.TaskItem;
+import com.mooo.ewolvy.whendidi.viewmodel.TasksViewModel;
 
 import java.util.List;
 
@@ -68,7 +70,11 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
+
+        TasksViewModel tasksViewModel =
+                ViewModelProviders.of(this).get(TasksViewModel.class);
+
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, tasksViewModel.getRemindTasksList(), mTwoPane));
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
@@ -77,15 +83,15 @@ public class TaskListActivity extends AppCompatActivity {
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         private final TaskListActivity mParentActivity;
-        private final List<DummyContent.DummyItem> mValues;
+        private final List<TaskItem> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
+                TaskItem item = (TaskItem) view.getTag();
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-                    arguments.putString(TaskDetailFragment.ARG_ITEM_ID, item.id);
+                    arguments.putString(TaskDetailFragment.ARG_ITEM_ID, item.getId());
                     TaskDetailFragment fragment = new TaskDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
@@ -94,7 +100,7 @@ public class TaskListActivity extends AppCompatActivity {
                 } else {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, TaskDetailActivity.class);
-                    intent.putExtra(TaskDetailFragment.ARG_ITEM_ID, item.id);
+                    intent.putExtra(TaskDetailFragment.ARG_ITEM_ID, item.getId());
 
                     context.startActivity(intent);
                 }
@@ -102,7 +108,7 @@ public class TaskListActivity extends AppCompatActivity {
         };
 
         SimpleItemRecyclerViewAdapter(TaskListActivity parent,
-                                      List<DummyContent.DummyItem> items,
+                                      List<TaskItem> items,
                                       boolean twoPane) {
             mValues = items;
             mParentActivity = parent;
@@ -119,10 +125,10 @@ public class TaskListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-            holder.mNameView.setText(mValues.get(position).name);
-            holder.mDateReminder.setText(mValues.get(position).remindOn);
-            holder.mLastTime.setText(mValues.get(position).lastTime);
-            holder.mView.setBackgroundColor(mValues.get(position).color);
+            holder.mNameView.setText(mValues.get(position).getName());
+            holder.mDateReminder.setText(mValues.get(position).getRemindOn());
+            holder.mLastTime.setText(mValues.get(position).getLastTime());
+            holder.mView.setBackgroundColor(mValues.get(position).getColor());
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
