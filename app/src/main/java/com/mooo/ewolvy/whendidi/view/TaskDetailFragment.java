@@ -33,7 +33,6 @@ public class TaskDetailFragment extends Fragment {
      * The dummy content this fragment is presenting.
      */
     private TaskItem mItem;
-    private TasksViewModel tasksViewModel;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -53,7 +52,7 @@ public class TaskDetailFragment extends Fragment {
             // to load content from a content provider.
             //mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
-            tasksViewModel = ViewModelProviders.of(this).get(TasksViewModel.class);
+            TasksViewModel tasksViewModel = ViewModelProviders.of(this).get(TasksViewModel.class);
             mItem = tasksViewModel.getItemById(getArguments().getString(ARG_ITEM_ID));
 
             Activity activity = this.getActivity();
@@ -77,6 +76,7 @@ public class TaskDetailFragment extends Fragment {
         button.setBackgroundColor(mItem.getColor());
         editText = rootView.findViewById(R.id.txtEditReminder);
         editText.setText(mItem.getRemindOn());
+
         editText = rootView.findViewById(R.id.txtEditHistoric);
         editText.setText(mItem.getDatesHistory());
         return rootView;
