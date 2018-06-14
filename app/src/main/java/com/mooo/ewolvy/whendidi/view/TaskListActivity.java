@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
@@ -67,19 +68,20 @@ public class TaskListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
+        tasksViewModel = ViewModelProviders.of(this).get(TasksViewModel.class);
+
         RecyclerView recyclerView = findViewById(R.id.task_list);
         assert recyclerView != null;
         setupRecyclerView(recyclerView);
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-
-        tasksViewModel = ViewModelProviders.of(this).get(TasksViewModel.class);
-
         adapter = new SimpleItemRecyclerViewAdapter(this, tasksViewModel.getRemindTasks(), mTwoPane);
         recyclerView.setAdapter(adapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
         itemTouchHelper.attachToRecyclerView(recyclerView);
+        LinearLayoutManager linearVertical = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(linearVertical);
     }
 
     private class SimpleItemRecyclerViewAdapter
