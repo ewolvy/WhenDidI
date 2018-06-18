@@ -51,8 +51,8 @@ public class DummyContent {
     };
 
     private static final String[] remindOns = {
-            "2019-07-05",
-            "2020-06-04",
+            "2018-06-05",
+            "2018-05-04",
             "2021-07-03",
             "NO",
     };

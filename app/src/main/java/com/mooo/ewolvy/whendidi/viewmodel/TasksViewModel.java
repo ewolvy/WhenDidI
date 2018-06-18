@@ -1,11 +1,15 @@
 package com.mooo.ewolvy.whendidi.viewmodel;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModel;
 
 import com.mooo.ewolvy.whendidi.dummy.DummyContent;
 import com.mooo.ewolvy.whendidi.model.TaskItem;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TasksViewModel extends ViewModel {
@@ -28,9 +32,21 @@ public class TasksViewModel extends ViewModel {
         }
         List<TaskItem> remindedTasksList = new ArrayList<>();
 
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date remindDate = null;
+
         for (int i = 0; i < tasksList.size(); i++){
             if (!tasksList.get(i).getRemindOn().equals("NO")){
-                remindedTasksList.add(tasksList.get(i));
+                try {
+                    remindDate = simpleDateFormat.parse(tasksList.get(i).getRemindOn());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (new Date().after(remindDate) && remindDate != null) {
+                    remindedTasksList.add(tasksList.get(i));
+                }
             }
         }
 
