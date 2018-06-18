@@ -14,17 +14,12 @@ import java.util.Random;
  * <p>
  * TODO: Replace all uses of this class before publishing your app.
  */
-public class DummyContent {
+public final class DummyContent {
 
     /**
      * An array of sample (dummy) items.
      */
     public static final List<TaskItem> ITEMS = new ArrayList<>();
-
-    /**
-     * A map of sample (dummy) items, by ID.
-     */
-    public static final Map<String, TaskItem> ITEM_MAP = new HashMap<>();
 
     private static final int COUNT = 15;
 
@@ -88,12 +83,10 @@ public class DummyContent {
 
     private static void addItem(TaskItem item) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.getId(), item);
     }
 
     private static void deleteItem(int position){
         ITEMS.remove(position);
-        ITEM_MAP.remove(String.valueOf(position));
     }
 
     private static TaskItem createDummyItem(String id, String name, String datesHistory, int color, String lastTime, String remindOn) {
